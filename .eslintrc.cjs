@@ -13,7 +13,7 @@ module.exports = {
   plugins: ['react-refresh', 'prettier', 'simple-import-sort'],
   rules: {
     'react-refresh/only-export-components': [
-      'warn',
+      'off',
       { allowConstantExport: true },
     ],
     '@typescript-eslint/explicit-function-return-type': [

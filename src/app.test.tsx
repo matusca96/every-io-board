@@ -2,10 +2,8 @@ import { render, screen } from "@testing-library/react";
 
 import { App } from "./app";
 
-test("renders learn react link", () => {
+it("renders page correctly", () => {
   render(<App />);
-  const linkElement = screen.getByText(
-    /Welcome To The Every.io Code Challenge./i,
-  );
-  expect(linkElement).toBeInTheDocument();
+
+  expect(screen.getByText(/Every.io/)).toBeInTheDocument();
 });

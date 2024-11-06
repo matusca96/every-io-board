@@ -30,7 +30,10 @@ export const Card = ({
 
   return (
     <BaseCard
-      className={cn(transform ? "cursor-grabbing" : "cursor-grab", "bg-white")}
+      className={cn(
+        transform ? "cursor-grabbing" : "cursor-grab",
+        "bg-primary-foreground",
+      )}
       ref={setNodeRef}
       style={style}
       {...attributes}
@@ -53,7 +56,7 @@ export const Card = ({
             className={
               disableLeft
                 ? "opacity-50 cursor-not-allowed"
-                : "hover:bg-gray-200"
+                : "hover:bg-blend-difference"
             }
           >
             <ChevronLeft className="h-4 w-4" />
@@ -66,7 +69,7 @@ export const Card = ({
             className={
               disableRight
                 ? "opacity-50 cursor-not-allowed"
-                : "hover:bg-gray-200"
+                : "hover:bg-blend-difference"
             }
           >
             <ChevronRight className="h-4 w-4" />
