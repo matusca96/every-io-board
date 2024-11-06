@@ -1,50 +1,25 @@
-# React + TypeScript + Vite
+# Every.io BOARD challenge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a small challenge from [Every.io](https://www.every.io/) to create a Trello-style task management board with three columns:
 
-Currently, two official plugins are available:
+- To Do;
+- In Progress;
+- Done.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Users can add tasks to the "To Do" column and move them between columns as they progress.
 
-## Expanding the ESLint configuration
+### Getting Started
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To run this project locally, follow these steps:
+1) Run the following command to install all necessary dependencies: `pnpm install`
+2) Start the development server with: `pnpm dev`
 
-- Configure the top-level `parserOptions` property like this:
+### Key improvements from the [original challenge repo](https://github.com/every-io/engineer-interview):
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+- **React 18 & Vite Migration:** Updated the project to React 18 and migrated from CRA to Vite, as recommended by the React team, for faster builds and a smoother development experience
+- **Code Quality:** Integrated ESLint and Prettier to maintain code quality and consistency
+- **Drag-and-Drop Functionality:** Added intuitive drag-and-drop support for moving tasks between columns
+- **UI Enhancements:** Modified the [original design](https://www.figma.com/proto/kd49ArXbBt0vi1kBSLkmC1/Code-Challenge?node-id=1%3A2&scaling=min-zoom&page-id=0%3A1) for a cleaner, more modern interface
+- **Unit Testing with Vitest:** Added unit tests using Vitest to enhance maintainability and reliability
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+Each of these choices reflects a production-oriented mindset to ensure smooth deployment and a positive experience for end users.
