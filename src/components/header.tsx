@@ -1,6 +1,7 @@
 import { Cog, MoonStar, Sun } from "lucide-react";
 
-import { useTheme } from "../context";
+import { useTheme } from "@/context";
+
 import { Button } from "./ui";
 
 export const Header = (): JSX.Element => {

@@ -4,7 +4,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 
-import { ColumnType } from "../types";
+import { ColumnType } from "@/types";
 
 type ColumnProps = {
   children: React.ReactNode;

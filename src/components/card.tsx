@@ -2,9 +2,10 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-import { cn } from "../lib/utils";
-import { CardType } from "../types";
-import { convertDate } from "../utils";
+import { cn } from "@/lib/utils";
+import { CardType } from "@/types";
+import { convertDate } from "@/utils";
+
 import { Button, Card as BaseCard, CardContent } from "./ui";
 
 type CardProps = {

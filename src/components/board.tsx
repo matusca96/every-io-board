@@ -1,5 +1,4 @@
 import {
-  Announcements,
   closestCenter,
   DndContext,
   DragEndEvent,
@@ -19,52 +18,12 @@ import {
   MouseSensor,
   PointerSensor,
   TouchSensor,
-} from "../lib/dnd/custom-sensors";
-import { CardType, ColumnType } from "../types";
+} from "@/lib/dnd/custom-sensors";
+import { CardType, ColumnType } from "@/types";
+
 import { Card } from "./card";
 import { Column } from "./column";
 import { Button, Input } from "./ui";
-
-const defaultAnnouncements: Announcements = {
-  onDragStart(id) {
-    console.log(`Picked up draggable item ${id}.`);
-
-    return "drag start";
-  },
-  onDragOver({ active, over }) {
-    if (over?.id) {
-      console.log(
-        `Draggable item ${active.id} was moved over droppable area ${over.id}.`,
-      );
-      return `over id ${over.id}`;
-    }
-
-    console.log(
-      `Draggable item ${active.id} is no longer over a droppable area.`,
-    );
-
-    return "drag-over";
-  },
-  onDragEnd({ active, over }) {
-    if (over?.id) {
-      console.log(
-        `Draggable item ${active.id} was dropped over droppable area ${over.id}`,
-      );
-      return `over id ${over.id}`;
-    }
-
-    console.log(`Draggable item ${active.id} was dropped.`);
-
-    return "drag-end";
-  },
-  onDragCancel({ active }) {
-    console.log(
-      `Dragging was cancelled. Draggable item ${active.id} was dropped.`,
-    );
-
-    return "drag-cancel";
-  },
-};
 
 export const Board = (): JSX.Element => {
   const [columns, setColumns] = useState<ColumnType[]>([
@@ -159,8 +118,6 @@ export const Board = (): JSX.Element => {
       return;
     }
 
-    console.log("Moving item from", activeColumn, "to", overColumn);
-
     setColumns((prevColumns) => {
       const updatedColumns = [...prevColumns];
 
@@ -247,16 +204,13 @@ export const Board = (): JSX.Element => {
           onChange={(e) => setNewCardContent(e.target.value)}
           className="flex-grow"
         />
-        <Button onClick={addCard}>
+        <Button disabled={!newCardContent} onClick={addCard}>
           <Plus className="h-4 w-4" /> Add Card
         </Button>
       </div>
 
       <div className="mt-6 flex-1 grid grid-cols-1 md:grid-cols-3 gap-6">
         <DndContext
-          accessibility={{
-            announcements: defaultAnnouncements,
-          }}
           sensors={sensors}
           collisionDetection={closestCenter}
           onDragStart={handleDragStart}
