@@ -73,19 +73,21 @@ export const Board = (): JSX.Element => {
 
     if (targetColumnIndex < 0 || targetColumnIndex >= columns.length) return;
 
-    const newColumns = [...columns];
-    const sourceColumn = newColumns[sourceColumnIndex];
-    const targetColumn = newColumns[targetColumnIndex];
+    setColumns((prevState) => {
+      const newColumns = [...prevState];
+      const sourceColumn = newColumns[sourceColumnIndex];
+      const targetColumn = newColumns[targetColumnIndex];
 
-    const cardIndex = sourceColumn.cards.findIndex(
-      (card) => card.id === cardId,
-    );
+      const cardIndex = sourceColumn.cards.findIndex(
+        (card) => card.id === cardId,
+      );
 
-    const [movedCard] = sourceColumn.cards.splice(cardIndex, 1);
+      const [movedCard] = sourceColumn.cards.splice(cardIndex, 1);
 
-    targetColumn.cards.push(movedCard);
+      targetColumn.cards.push(movedCard);
 
-    setColumns(newColumns);
+      return newColumns;
+    });
   };
 
   const findColumn = (id: UniqueIdentifier | undefined): string | undefined => {
@@ -161,33 +163,34 @@ export const Board = (): JSX.Element => {
 
   const handleDragEnd = (event: DragEndEvent): void => {
     const { active, over } = event;
-    const { id } = active;
 
-    const activeColumn = findColumn(id);
-    const overColumn = findColumn(over?.id);
+    if (!over) return; // Early exit if no valid drop target
 
-    if (!activeColumn || !overColumn || activeColumn !== overColumn) {
-      return;
-    }
+    const activeColumn = findColumn(active.id);
+    const overColumn = findColumn(over.id);
 
-    const activeIndex = columns
-      .find((column) => column.id === activeColumn)
-      ?.cards.map((card) => card.id)
-      .indexOf(active.id as unknown as string);
-    const overIndex = columns
-      .find((column) => column.id === overColumn)
-      ?.cards.map((card) => card.id)
-      .indexOf(over?.id as unknown as string);
+    if (!activeColumn || !overColumn || activeColumn !== overColumn) return;
+
+    const activeColumnData = columns.find((col) => col.id === activeColumn);
+    if (!activeColumnData) return;
+
+    const activeIndex = activeColumnData.cards.findIndex(
+      (card) => card.id === active.id,
+    );
+    const overIndex = activeColumnData.cards.findIndex(
+      (card) => card.id === over.id,
+    );
 
     if (activeIndex !== overIndex) {
-      setColumns(
-        columns.map((column) => ({
-          ...column,
-          cards:
-            column.id === activeColumn
-              ? arrayMove(column.cards, activeIndex!, overIndex!)
-              : column.cards,
-        })),
+      setColumns((prevColumns) =>
+        prevColumns.map((column) =>
+          column.id === activeColumn
+            ? {
+                ...column,
+                cards: arrayMove(column.cards, activeIndex, overIndex),
+              }
+            : column,
+        ),
       );
     }
 

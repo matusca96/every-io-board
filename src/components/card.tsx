@@ -31,10 +31,7 @@ export const Card = ({
 
   return (
     <BaseCard
-      className={cn(
-        transform ? "cursor-grabbing" : "cursor-grab",
-        "bg-primary-foreground",
-      )}
+      className={cn(transform ? "cursor-grabbing" : "cursor-grab")}
       ref={setNodeRef}
       style={style}
       {...attributes}

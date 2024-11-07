@@ -23,7 +23,10 @@ export const Column = ({ children, column }: ColumnProps): JSX.Element => {
       items={column.cards}
       strategy={verticalListSortingStrategy}
     >
-      <div ref={setNodeRef} className="h-full bg-secondary p-4 rounded-md">
+      <div
+        ref={setNodeRef}
+        className="h-full border bg-primary-foreground/50 p-4 rounded-md"
+      >
         <h2 className="font-semibold text-ring text-lg mb-4">{column.title}</h2>
 
         <div className="space-y-2">{children}</div>
